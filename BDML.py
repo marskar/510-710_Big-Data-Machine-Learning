@@ -1,8 +1,7 @@
-from typing import Any, Union, List
+from typing import Any, Union
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import learning_curve
 from sklearn.metrics import confusion_matrix
-from sklearn.preprocessing import normalize
 from sklearn.metrics import precision_score, recall_score, f1_score
 from sklearn.linear_model import Perceptron
 from sklearn.linear_model import LogisticRegression
@@ -64,7 +63,7 @@ classifiers = (
     KNeighborsClassifier(5)
 )
 
-scores = []
+score_list = []
 np.random.seed(0)
 
 
@@ -73,10 +72,10 @@ def run_pipe1(name, clf):
     pipe.fit(X_train, y_train)
     score = pipe.score(X_test, y_test)
     print("Algo: {0:<20s} and Score: {1:0.4f}".format(name, score))
-    scores.append(score)
+    score_list.append(score)
     print(' ')
-    index = int(np.argmax(scores))
-    print(f'{names[index]} performed the best with accuracy {max(scores):0.4f}')
+    index = int(np.argmax(score_list))
+    print(f'{names[index]} performed the best with accuracy {max(score_list):0.4f}')
     return name, score
 
 
@@ -97,13 +96,8 @@ def get_cvscore(name, clf):
 
 
 d_pipe1 = dict(map(run_pipe1, names, classifiers))
-d_pipe1
-
 d_pipe2 = dict(map(run_pipe2, names, classifiers))
-d_pipe2
-
 d_cv = dict(map(get_cvscore, names, classifiers))
-d_cv
 
 
 def get_modstats(name, clf):
@@ -241,7 +235,7 @@ def lcurve(name, clf):
     pipe = Pipeline([('pca', PCA(n_components=5)), ('clf', clf)])
     train_sizes, train_scores, test_scores = \
         learning_curve(estimator=pipe, X=X_train, y=y_train,
-                       train_sizes=np.linspace(0.1, 1.0, 10, 100), cv=10, n_jobs=1)
+                       train_sizes=np.linspace(0.1, 1.0, 10), cv=10, n_jobs=1)
     train_mean = np.mean(train_scores, axis=1)
     train_std = np.std(train_scores, axis=1)
     test_mean = np.mean(test_scores, axis=1)
@@ -263,5 +257,6 @@ def lcurve(name, clf):
     plt.title(name)
     plt.savefig("learning-curve-" + name + ".png", dpi=300)
     plt.show()
+
 
 list(map(lcurve, names, classifiers))

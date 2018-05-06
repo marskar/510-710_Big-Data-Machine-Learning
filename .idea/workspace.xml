@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c810d17-7c64-4c65-b692-1949fc54b072" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/original.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BDML.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BDML.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BDML.py" beforeDir="false" afterPath="$PROJECT_DIR$/BDML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Decision Tree.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Decision Tree.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-LogisticRegression.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-LogisticRegression.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Naive Bayes.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Naive Bayes.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Nearest Neighbors.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Nearest Neighbors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Neural Net.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Neural Net.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Perceptron.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Perceptron.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-RBF SVM.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-RBF SVM.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-Random Forest.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-Random Forest.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning-curve-SVC.png" beforeDir="false" afterPath="$PROJECT_DIR$/learning-curve-SVC.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,11 +46,49 @@
       <file leaf-file-name="BDML.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BDML.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="745">
-              <caret line="266" selection-start-line="237" selection-end-line="266" selection-end-column="37" />
+            <state relative-caret-position="306">
+              <caret line="232" column="15" selection-end-line="262" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="skillcraft_ensemble_update.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/skillcraft_ensemble_update.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="SkillCraft-Ensemble-Update (2).py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
+              <folding>
+                <element signature="e#28#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scratch_12.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_12.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="817">
+              <caret line="312" column="10" selection-start-line="312" selection-start-column="10" selection-end-line="312" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="original.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/original.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -62,6 +113,8 @@
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_10.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_11.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_12.py" />
+        <option value="$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py" />
         <option value="$PROJECT_DIR$/BDML.py" />
       </list>
     </option>
@@ -79,7 +132,9 @@
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -205,11 +260,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Key Promoter X" order="0" weight="0.3298611" />
       <window_info anchor="bottom" id="TODO" order="10" weight="0.329602" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
-      <window_info anchor="right" x="0" y="0" width="620" height="700" id="Documentation" order="8" sideWeight="0.49875623" type="SLIDING" weight="0.42083332" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="right" x="398" y="22" width="644" height="878" id="Run" order="6" side_tool="true" type="SLIDING" weight="0.44722223" />
       <window_info anchor="bottom" id="Version Control" order="2" />
@@ -219,7 +274,7 @@
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="1" />
       <window_info anchor="bottom" id="Find" order="6" />
-      <window_info active="true" anchor="right" x="482" y="191" width="475" height="539" id="SciView" order="2" type="SLIDING" visible="true" weight="0.44375" />
+      <window_info active="true" anchor="right" auto_hide="true" x="482" y="191" width="475" height="539" id="SciView" order="2" type="FLOATING" visible="true" weight="0.44375" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info id="Favorites" order="0" sideWeight="0.5022779" side_tool="true" weight="0.25" />
@@ -229,6 +284,7 @@
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="620" height="700" id="Documentation" order="8" sideWeight="0.49875623" weight="0.42083332" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,10 +322,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/original.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_12.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="312" column="10" selection-start-line="312" selection-start-column="10" selection-end-line="312" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skillcraft_ensemble_update.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+          <folding>
+            <element signature="e#28#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BDML.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="745">
-          <caret line="266" selection-start-line="237" selection-end-line="266" selection-end-column="37" />
+        <state relative-caret-position="306">
+          <caret line="232" column="15" selection-end-line="262" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
