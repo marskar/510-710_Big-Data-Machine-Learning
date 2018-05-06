@@ -125,11 +125,10 @@ pd.DataFrame(l_modelstats, columns=("Algorithm",
                                     "Recall")).astype("object")
 
 # Employ GridSearchCV() to find the optimal parameters for SVC's kernel = 'rbf',
-classifier = SVC(kernel="rbf")
 c = [0.01, 1, 10, 100]
 gamma = [0.001, 0.01, 0.1, 1.0, 100.0]
 
-pipe = Pipeline([('scl', StandardScaler()), ('clf', SVC(C=100))])
+pipe = Pipeline([('scl', StandardScaler()), ('clf', SVC())])
 
 pipe.fit(X_train, y_train)  # <- note that pipe line inherits clf methods
 print(pipe.score(X_test, y_test))  # notably .fit(), .predict() and .score()
