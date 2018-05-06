@@ -124,40 +124,35 @@ pd.DataFrame(l_modelstats, columns=("Algorithm",
                                     "F1", "Precision",
                                     "Recall")).astype("object")
 
+
 # Employ GridSearchCV() to find the optimal parameters for SVC's kernel = 'rbf',
+def gs_svc(c_param, gamma_param):
+    pipe = Pipeline([('scl', StandardScaler()), ('clf', SVC())])
+    pipe.fit(X_train, y_train)  # <- note that pipe line inherits clf methods
+    print(pipe.score(X_test, y_test))  # notably .fit(), .predict() and .score()
+    params = {'clf__kernel': ['rbf'], 'clf__C': c_param, 'clf__gamma': gamma_param}
+    grid = GridSearchCV(estimator=pipe, param_grid=params, cv=3)
+    grid.fit(X_train, y_train)
+    print(grid.best_estimator_)
+    print(' ')
+    print(grid.best_score_)
+    print(' ')
+    print(grid.score(X_test, y_test))
+    print(' ')
+    print(grid.best_params_)
+    # nested cross-validation csv
+    gs = GridSearchCV(estimator=pipe, param_grid=params, scoring='accuracy', cv=2)
+    scores = cross_val_score(gs, X_train, y_train, scoring='accuracy', cv=5)
+    print('CV accuracy: %.3f +/- %.3f' % (np.mean(scores), np.std(scores)))
+
+
 c = [0.01, 1, 10, 100]
 gamma = [0.001, 0.01, 0.1, 1.0, 100.0]
-
-pipe = Pipeline([('scl', StandardScaler()), ('clf', SVC())])
-
-pipe.fit(X_train, y_train)  # <- note that pipe line inherits clf methods
-print(pipe.score(X_test, y_test))  # notably .fit(), .predict() and .score()
-
-params = {'clf__kernel': ['rbf'], 'clf__C': c, 'clf__gamma': gamma}
-
-grid = GridSearchCV(estimator=pipe, param_grid=params, cv=3)
-
-grid.fit(X_train, y_train)
-print(grid.best_estimator_)
-print(' ')
-print(grid.best_score_)
-print(' ')
-print(grid.score(X_test, y_test))
-print(' ')
-print(grid.best_params_)
-
-# nested cross-validation csv
-gs = GridSearchCV(estimator=pipe, param_grid=params, scoring='accuracy', cv=2)
-
-scores = cross_val_score(gs, X_train, y_train, scoring='accuracy', cv=5)
-print('CV accuracy: %.3f +/- %.3f' % (np.mean(scores), np.std(scores)))
+gs_svc(c, gamma)
 
 # Employ GridSearchCV() to find the optimal parameters for DecisionTreeClassifier
-clf = DecisionTreeClassifier()
 c = [5, 10, 15, 20, 25, 30]
-
-pipe = Pipeline([('scl', StandardScaler()), ('clf', DecisionTreeClassifier(max_depth=5))])
-
+pipe = Pipeline([('scl', StandardScaler()), ('clf', DecisionTreeClassifier())])
 params = {'clf__max_depth': c}
 score_types = ['accuracy', 'roc_auc', 'f1']
 print('Grid search for DecisionTree')
