@@ -143,7 +143,7 @@ def gs_svc(c_param, gamma_param):
     # nested cross-validation csv
     gs = GridSearchCV(estimator=pipe, param_grid=params, scoring='accuracy', cv=2)
     scores = cross_val_score(gs, X_train, y_train, scoring='accuracy', cv=5)
-    print('CV accuracy: %.3f +/- %.3f' % (np.mean(scores), np.std(scores)))
+    print(f'CV accuracy: {np.mean(scores):.3f} +/- {np.std(scores):.3f}')
 
 
 c = [0.01, 1, 10, 100]
