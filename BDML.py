@@ -102,7 +102,7 @@ d_pipe1
 d_pipe2 = dict(map(run_pipe2, names, classifiers))
 d_pipe2
 
-d_cv = dict(map(get_score, names, classifiers))
+d_cv = dict(map(get_cvscore, names, classifiers))
 d_cv
 
 
@@ -215,7 +215,7 @@ rfc_mean = get_score(pipeline, parameters)
 
 
 # Employ GridSearchCV() to find the optimal parameters for KNN
-def gs_knc():
+def gs_knc(based_on):
     print('Grid search for KNN')
     pipe = Pipeline([('scl', StandardScaler()), ('clf', KNeighborsClassifier())])
     params = {'clf__n_neighbors': [5, 8, 10, 12, 15]}
@@ -242,41 +242,25 @@ def lcurve(name, clf):
     train_sizes, train_scores, test_scores = \
         learning_curve(estimator=pipe, X=X_train, y=y_train,
                        train_sizes=np.linspace(0.1, 1.0, 10, 100), cv=10, n_jobs=1)
+    train_mean = np.mean(train_scores, axis=1)
+    train_std = np.std(train_scores, axis=1)
+    test_mean = np.mean(test_scores, axis=1)
+    test_std = np.std(test_scores, axis=1)
+    plt.plot(train_sizes, train_mean, color='blue', marker='o',
+             markersize=5, label='training accuracy')
+    plt.fill_between(train_sizes, train_mean + train_std,
+                     train_mean - train_std, alpha=0.15, color='blue')
+    plt.plot(train_sizes, test_mean, color='green', linestyle='--',
+             marker='s', markersize=5, label='validation accuracy')
+    plt.fill_between(train_sizes, test_mean + test_std,
+                     test_mean - test_std, alpha=0.15, color='green')
+    plt.grid()
+    plt.xlabel('Number of training samples')
+    plt.ylabel('Accuracy')
+    plt.legend(loc='lower right')
+    plt.ylim([0.5, 0.9])
+    plt.tight_layout()
+    plt.title(name)
+    plt.show()
 
-    pipe.fit(X_train, y_train)
-    score = pipe.score(X_test, y_test)
-    print(f"Algo: {name:<20s} and Score: {score:0.4f}")
-    return name, score
-
-
-for name, clf in zip(names, classifiers):
-    pipe = Pipeline([('pca', PCA(n_components=5)), ('clf', clf)])
-    train_sizes, train_scores, test_scores = \
-        learning_curve(estimator=pipe, X=X_train, y=y_train,
-                       train_sizes=np.linspace(0.1, 1.0, 10, 100), cv=10, n_jobs=1)
-
-train_mean = np.mean(train_scores, axis=1)
-train_std = np.std(train_scores, axis=1)
-test_mean = np.mean(test_scores, axis=1)
-test_std = np.std(test_scores, axis=1)
-
-plt.plot(train_sizes, train_mean, color='blue', marker='o',
-         markersize=5, label='training accuracy')
-
-plt.fill_between(train_sizes, train_mean + train_std,
-                 train_mean - train_std, alpha=0.15, color='blue')
-
-plt.plot(train_sizes, test_mean, color='green', linestyle='--',
-         marker='s', markersize=5, label='validation accuracy')
-
-plt.fill_between(train_sizes, test_mean + test_std,
-                 test_mean - test_std, alpha=0.15, color='green')
-
-plt.grid()
-plt.xlabel('Number of training samples')
-plt.ylabel('Accuracy')
-plt.legend(loc='lower right')
-plt.ylim([0.5, 0.9])
-plt.tight_layout()
-plt.title('Learning Curve')
-plt.show()
+list(map(lcurve, names, classifiers))
