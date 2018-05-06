@@ -258,9 +258,10 @@ def lcurve(name, clf):
     plt.xlabel('Number of training samples')
     plt.ylabel('Accuracy')
     plt.legend(loc='lower right')
-    plt.ylim([0.5, 0.9])
+    plt.ylim([0.5, 1])
     plt.tight_layout()
     plt.title(name)
+    plt.savefig("learning-curve-" + name + ".png", dpi=300)
     plt.show()
 
 list(map(lcurve, names, classifiers))
