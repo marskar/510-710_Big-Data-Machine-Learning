@@ -7,14 +7,27 @@ from sklearn.base import ClassifierMixin
 from sklearn.externals import six
 from sklearn.base import clone
 from sklearn.pipeline import _name_estimators
-import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+from itertools import product
+from sklearn.metrics import roc_curve
+from sklearn.metrics import auc
+from sklearn.decomposition import PCA
+import numpy as np
+from sklearn.linear_model import LogisticRegression, Perceptron
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import cross_val_score
+import warnings
+warnings.filterwarnings("ignore")
+
 
 # %% define classifier
-
-
 class MajorityVoteClassifier(BaseEstimator, ClassifierMixin):
     """ A majority vote ensemble classifier
 
@@ -151,7 +164,6 @@ class MajorityVoteClassifier(BaseEstimator, ClassifierMixin):
 
 
 #  Using the majority voting principle to make predictions
-
 # %% import data
 df = pd.read_csv('Skill.csv')
 
@@ -163,29 +175,18 @@ df2.describe()
 # %% explore data
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 
-# In[57]:
-
-
-from sklearn.decomposition import PCA
-
+# %% PCA
 pca = PCA(n_components=2)
-
-# In[72]:
-
-
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 X = StandardScaler().fit_transform(X)
 pca = PCA(n_components=2)
 X = pca.fit_transform(X)
-
 h = 0.02
-
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
 y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
 xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                      np.arange(y_min, y_max, h))
 
-cm = plt.cm.RdBu
 cm_bright = ListedColormap(['#FF0000', '#0000FF'])
 
 fig = plt.figure(figsize=(8, 8))
@@ -194,23 +195,13 @@ ax = fig.add_subplot(1, 1, 1)
 # Plot the training points
 ax.scatter(X[:, 0], X[:, 1], c=y, cmap=cm_bright, alpha=0.5)
 
-# ax.set_xlim(xx.min(), xx.max())
-# ax.set_ylim(yy.min(), yy.max())
-# ax.set_xticks(())
-# ax.set_yticks(())
-
 ax.set_xlabel('Principal Component 1', fontsize=15)
 ax.set_ylabel('Principal Component 2', fontsize=15)
 ax.set_title('2 component PCA', fontsize=20)
 ax.grid()
 
-# In[59]:
-
-
+# %% train test split
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
-# le = LabelEncoder()
-# y = le.fit_transform(y)
-
 print(y.sum() / y.size)
 print(1 - y.sum() / y.size)
 # print(df2.describe())
@@ -220,78 +211,32 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     random_state=1,
                                                     stratify=y)
 
-# In[60]:
-
-
-import numpy as np
-from sklearn.linear_model import LogisticRegression, Perceptron
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.neural_network import MLPClassifier
-from sklearn.naive_bayes import GaussianNB
-
-import warnings
-
-warnings.filterwarnings("ignore")
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import cross_val_score
-
-clf1 = LogisticRegression(penalty='l2',
-                          C=0.001,
-                          random_state=1)
-
-clf2 = DecisionTreeClassifier(max_depth=1,
-                              criterion='entropy',
-                              random_state=0)
-
-clf3 = KNeighborsClassifier(n_neighbors=1,
-                            p=2,
-                            metric='minkowski')
-
+# %% define classifiers and pipes
+clf1 = LogisticRegression(penalty='l2', C=0.001, random_state=1)
+clf2 = DecisionTreeClassifier(max_depth=1, criterion='entropy', random_state=0)
+clf3 = KNeighborsClassifier(n_neighbors=1, p=2, metric='minkowski')
 clf4 = Perceptron()
-
 clf5 = SVC(kernel='rbf', gamma=2, C=1)
-
 clf6 = MLPClassifier(hidden_layer_sizes=(50, 25), alpha=1)
-
 clf7 = GaussianNB()
 
-#### add 2 more classifiers here ####
+pipe1 = Pipeline([['sc', StandardScaler()], ['clf', clf1]])
+pipe3 = Pipeline([['sc', StandardScaler()], ['clf', clf3]])
+pipe4 = Pipeline([['sc', StandardScaler()], ['clf', clf4]])
+pipe5 = Pipeline([['sc', StandardScaler()], ['clf', clf5]])
+pipe6 = Pipeline([['sc', StandardScaler()], ['clf', clf6]])
+pipe7 = Pipeline([['sc', StandardScaler()], ['clf', clf7]])
 
-pipe1 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf1]])
+clf_labels = ['Logistic regression', 'Decision tree',
+              'KNN', 'Perceptron', 'RBF SVC',
+              'Neural Network', 'Naive Bayes']
 
-### note: no StandardScaler() here 
+# %% Majority Rule (hard) Voting
 
-pipe3 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf3]])
-
-pipe4 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf4]])
-
-pipe5 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf5]])
-
-pipe6 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf6]])
-
-pipe7 = Pipeline([['sc', StandardScaler()],
-                  ['clf', clf7]])
-
-clf_labels = ['Logistic regression', 'Decision tree', 'KNN', 'Perceptron', 'RBF SVC', 'Neural Network', 'Naive Bayes']
-
-# In[75]:
-
-
-# Majority Rule (hard) Voting
-
-#### fix here
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7])
 
 clf_labels += ['Majority voting']
 
-#### fix here
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 for clf, label in zip(all_clf, clf_labels):
@@ -303,15 +248,8 @@ for clf, label in zip(all_clf, clf_labels):
     print("ROC AUC: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
 
-# In[76]:
-
-
-# Accuracy
-
-#### fix here
+# %% Accuracy
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7])
-
-#### fix here
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 for clf, label in zip(all_clf, clf_labels):
@@ -323,15 +261,8 @@ for clf, label in zip(all_clf, clf_labels):
     print("Accuracy: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
 
-# In[77]:
-
-
-# Prune
-
-#### fix here
+# %% Prune1
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
-
-#### fix here
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 for clf, label in zip(all_clf, clf_labels):
@@ -343,15 +274,8 @@ for clf, label in zip(all_clf, clf_labels):
     print("ROC AUC: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
 
-# In[78]:
-
-
-# Prune
-
-#### fix here
+# Prune2
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
-
-#### fix here
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 for clf, label in zip(all_clf, clf_labels):
@@ -363,21 +287,12 @@ for clf, label in zip(all_clf, clf_labels):
     print("Accuracy: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
 
-# <br>
-# <br>
-
-# # Evaluating and tuning the ensemble classifier
-
-# In[64]:
-
-
-from sklearn.metrics import roc_curve
-from sklearn.metrics import auc
-
+# %% Plotting decision boundaries first two principal components
+# Evaluating and tuning the ensemble classifier
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
 
 colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']  ## <- fix here
-linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']  ## <- fix here
+linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']
 for clf, label, clr, ls in zip(all_clf,
                                clf_labels, colors, linestyles):
 
@@ -419,10 +334,6 @@ sc = StandardScaler()
 X_train_std = sc.fit_transform(X_train.iloc[:, [2, 3]])
 
 # In[66]:
-
-
-from itertools import product
-
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 x_min = X_train_std[:, 0].min() - 1
@@ -486,7 +397,6 @@ X = StandardScaler().fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
 h = .02
-cm = plt.cm.RdBu
 cm_bright = ListedColormap(['#FF0000', '#0000FF'])
 
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
@@ -502,12 +412,8 @@ f, axarr = plt.subplots(nrows=4, ncols=2,
 
 for idx, clf, name in zip(product([0, 1, 2, 3], [0, 1]),
                           all_clf, clf_labels):
-    # iterate over classifiers
-    # for name, clf in zip(clf_labels, all_clf):
-    # ax = plt.subplot(1, len(all_clf), i)
     clf.fit(X_train, y_train)
     score = clf.score(X_test, y_test)
-
     # Plot the decision boundary. For that, we will assign a color to each
     # point in the mesh [x_min, x_max]x[y_min, y_max].
     if hasattr(clf, "decision_function"):
@@ -517,7 +423,7 @@ for idx, clf, name in zip(product([0, 1, 2, 3], [0, 1]),
 
         # Put the result into a color plot
     Z = Z.reshape(xx.shape)
-    axarr[idx[0], idx[1]].contourf(xx, yy, Z, cmap=cm, alpha=.8)
+    axarr[idx[0], idx[1]].contourf(xx, yy, Z, alpha=.8)
 
     # Plot also the training points
     axarr[idx[0], idx[1]].scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright)
@@ -530,8 +436,6 @@ for idx, clf, name in zip(product([0, 1, 2, 3], [0, 1]),
     axarr[idx[0], idx[1]].set_xticks(())
     axarr[idx[0], idx[1]].set_yticks(())
     axarr[idx[0], idx[1]].set_title(name)
-    # if ds_cnt == 0:
-    # ax.set_title(name)
     axarr[idx[0], idx[1]].text(xx.max() - .3, yy.min() + .3, ('%.3f' % score).lstrip('0'),
                                size=15, horizontalalignment='right')
     i += 1
