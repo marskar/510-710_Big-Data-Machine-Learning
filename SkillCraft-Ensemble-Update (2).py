@@ -248,6 +248,7 @@ def get_score(clf, label, based_on):
           % (scores.mean(), scores.std(), label))
     return label, based_on, scores.mean(), scores.std(), label
 
+
 score_types = ['accuracy', 'roc_auc', 'f1']
 t_score = tuple(map(get_score, all_clf, clf_labels, score_types))
 
