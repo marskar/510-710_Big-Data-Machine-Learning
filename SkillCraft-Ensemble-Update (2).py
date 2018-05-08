@@ -238,58 +238,26 @@ clf_labels += ['Majority voting']
 
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
-for clf, label in zip(all_clf, clf_labels):
+def get_score(clf, label, based_on):
     scores = cross_val_score(estimator=clf,
                              X=X_train,
                              y=y_train,
                              cv=10,
-                             scoring='roc_auc')
+                             scoring=based_on)
     print("ROC AUC: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
+    return label, based_on, scores.mean(), scores.std(), label
 
-# %% Accuracy
-mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7])
-all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
+score_types = ['accuracy', 'roc_auc', 'f1']
+t_score = tuple(map(get_score, all_clf, clf_labels, score_types))
 
-for clf, label in zip(all_clf, clf_labels):
-    scores = cross_val_score(estimator=clf,
-                             X=X_train,
-                             y=y_train,
-                             cv=10,
-                             scoring='accuracy')
-    print("Accuracy: %0.2f (+/- %0.2f) [%s]"
-          % (scores.mean(), scores.std(), label))
-
-# %% Prune1
+# %% Prune
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
-
-for clf, label in zip(all_clf, clf_labels):
-    scores = cross_val_score(estimator=clf,
-                             X=X_train,
-                             y=y_train,
-                             cv=10,
-                             scoring='roc_auc')
-    print("ROC AUC: %0.2f (+/- %0.2f) [%s]"
-          % (scores.mean(), scores.std(), label))
-
-# Prune2
-mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
-all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
-
-for clf, label in zip(all_clf, clf_labels):
-    scores = cross_val_score(estimator=clf,
-                             X=X_train,
-                             y=y_train,
-                             cv=10,
-                             scoring='accuracy')
-    print("Accuracy: %0.2f (+/- %0.2f) [%s]"
-          % (scores.mean(), scores.std(), label))
+t_score_prune = tuple(map(get_score, all_clf, clf_labels, score_types))
 
 # %% ROC Curve Plot
 # Evaluating and tuning the ensemble classifier
-mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
-
 colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']
 linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']
 for clf, label, clr, ls in zip(all_clf,

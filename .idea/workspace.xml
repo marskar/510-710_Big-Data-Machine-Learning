@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c810d17-7c64-4c65-b692-1949fc54b072" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PCA.png" beforeDir="false" afterPath="$PROJECT_DIR$/PCA.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py" beforeDir="false" afterPath="$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py" afterDir="false" />
     </list>
@@ -35,11 +34,20 @@
       <file leaf-file-name="SkillCraft-Ensemble-Update (2).py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3160">
-              <caret line="414" lean-forward="true" selection-start-line="414" selection-end-line="414" />
+            <state relative-caret-position="540">
+              <caret line="267" column="32" selection-start-line="267" selection-start-column="32" selection-end-line="267" selection-end-column="32" />
               <folding>
                 <element signature="e#13#57#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BDML.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BDML.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="61">
+              <caret line="224" column="9" selection-start-line="224" selection-start-column="9" selection-end-line="224" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -284,7 +292,7 @@
       <window_info anchor="right" x="0" y="0" width="620" height="700" id="Documentation" order="8" sideWeight="0.49875623" type="SLIDING" weight="0.42083332" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="2" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="7" sideWeight="0.50124377" type="SLIDING" weight="0.48333332" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="7" sideWeight="0.50124377" type="SLIDING" visible="true" weight="0.48333332" />
       <window_info anchor="right" x="398" y="22" width="644" height="878" id="Run" internal_type="SLIDING" order="6" side_tool="true" visible="true" weight="0.44722223" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.329602" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4977221" weight="0.25" />
@@ -392,13 +400,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BDML.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="232" column="15" selection-end-line="262" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SkillCraft2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -427,10 +428,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BDML.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="224" column="9" selection-start-line="224" selection-start-column="9" selection-end-line="224" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3160">
-          <caret line="414" lean-forward="true" selection-start-line="414" selection-end-line="414" />
+        <state relative-caret-position="540">
+          <caret line="267" column="32" selection-start-line="267" selection-start-column="32" selection-end-line="267" selection-end-column="32" />
           <folding>
             <element signature="e#13#57#0" expanded="true" />
           </folding>
