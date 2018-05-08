@@ -415,7 +415,7 @@ for idx, clf, name in zip(product([0, 1, 2, 3], [0, 1]),
 
         # Put the result into a color plot
     Z = Z.reshape(xx.shape)
-    axarr[idx[0], idx[1]].contourf(xx, yy, Z, alpha=.8)
+    axarr[idx[0], idx[1]].contourf(xx, yy, Z, cmap=plt.cm.RdBu, alpha=.8)
 
     # Plot also the training points
     axarr[idx[0], idx[1]].scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright)
