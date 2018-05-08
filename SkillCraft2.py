@@ -176,8 +176,8 @@ df2.describe()
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 
 # %% PCA
-X = StandardScaler().fit_transform(X)
 pca = PCA(n_components=2)
+X = StandardScaler().fit_transform(X)
 X = pca.fit_transform(X)
 h = 0.02
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
@@ -197,10 +197,8 @@ ax.set_xlabel('Principal Component 1', fontsize=15)
 ax.set_ylabel('Principal Component 2', fontsize=15)
 ax.set_title('2 component PCA', fontsize=20)
 ax.grid()
-plt.show()
 
 # %% train test split
-X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 print(y.sum() / y.size)
 print(1 - y.sum() / y.size)
 # print(df2.describe())
@@ -231,6 +229,7 @@ clf_labels = ['Logistic regression', 'Decision tree',
               'Neural Network', 'Naive Bayes']
 
 # %% Majority Rule (hard) Voting
+
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7])
 
 clf_labels += ['Majority voting']
@@ -285,11 +284,11 @@ for clf, label in zip(all_clf, clf_labels):
     print("Accuracy: %0.2f (+/- %0.2f) [%s]"
           % (scores.mean(), scores.std(), label))
 
-# %% ROC Curve Plot
+# %% Plotting decision boundaries first two principal components
 # Evaluating and tuning the ensemble classifier
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
 
-colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']  ## <- fix here
+colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']
 linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']
 for clf, label, clr, ls in zip(all_clf,
                                clf_labels, colors, linestyles):
@@ -325,9 +324,13 @@ plt.ylabel('True positive rate (TPR)')
 # plt.savefig('images/07_04', dpi=300)
 plt.show()
 
-# %%  Plotting decision boundaries on the first two principal components
+# In[65]:
+
+
 sc = StandardScaler()
 X_train_std = sc.fit_transform(X_train.iloc[:, [2, 3]])
+
+# In[66]:
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
 
 x_min = X_train_std[:, 0].min() - 1
@@ -379,8 +382,9 @@ plt.text(-14, 20,
 # plt.savefig('images/07_05', dpi=300)
 plt.show()
 
+# In[67]:
 
-# %% Plotting decision boundaries first two principal components
+
 from itertools import product
 
 pca = PCA(n_components=2)

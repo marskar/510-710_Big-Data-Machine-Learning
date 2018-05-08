@@ -172,12 +172,12 @@ print(df.describe())
 df2 = df[df['TotalHours'] < 5000]
 df2.describe()
 
-# %% define X and y global variables
+# %% explore data
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 
-# %% PCA
-X = StandardScaler().fit_transform(X)
+# %% PCA plot
 pca = PCA(n_components=2)
+X = StandardScaler().fit_transform(X)
 X = pca.fit_transform(X)
 h = 0.02
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
@@ -189,6 +189,7 @@ cm_bright = ListedColormap(['#FF0000', '#0000FF'])
 
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(1, 1, 1)
+plt.show()
 
 # Plot the training points
 ax.scatter(X[:, 0], X[:, 1], c=y, cmap=cm_bright, alpha=0.5)
@@ -203,7 +204,6 @@ plt.show()
 X, y = df2.iloc[:, 1:], df2.iloc[:, 0]
 print(y.sum() / y.size)
 print(1 - y.sum() / y.size)
-# print(df2.describe())
 
 X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.25,
@@ -289,7 +289,7 @@ for clf, label in zip(all_clf, clf_labels):
 # Evaluating and tuning the ensemble classifier
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
 
-colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']  ## <- fix here
+colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']
 linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']
 for clf, label, clr, ls in zip(all_clf,
                                clf_labels, colors, linestyles):
@@ -325,7 +325,7 @@ plt.ylabel('True positive rate (TPR)')
 # plt.savefig('images/07_04', dpi=300)
 plt.show()
 
-# %%  Plotting decision boundaries on the first two principal components
+# %% Plotting decision boundaries on two variables: Age and Hours per Week
 sc = StandardScaler()
 X_train_std = sc.fit_transform(X_train.iloc[:, [2, 3]])
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
@@ -379,18 +379,8 @@ plt.text(-14, 20,
 # plt.savefig('images/07_05', dpi=300)
 plt.show()
 
-
-# %% Plotting decision boundaries first two principal components
-from itertools import product
-
-pca = PCA(n_components=2)
-
-X = pca.fit_transform(X)
-X = StandardScaler().fit_transform(X)
+# %%  Plotting decision boundaries on the first two principal components
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-
-h = .02
-cm_bright = ListedColormap(['#FF0000', '#0000FF'])
 
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
 y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
