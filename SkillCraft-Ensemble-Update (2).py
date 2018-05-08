@@ -197,6 +197,7 @@ ax.set_xlabel('Principal Component 1', fontsize=15)
 ax.set_ylabel('Principal Component 2', fontsize=15)
 ax.set_title('2 component PCA', fontsize=20)
 ax.grid()
+plt.savefig("PCA.png", dpi=300)
 plt.show()
 
 # %% train test split
@@ -289,7 +290,7 @@ for clf, label in zip(all_clf, clf_labels):
 # Evaluating and tuning the ensemble classifier
 mv_clf = MajorityVoteClassifier(classifiers=[pipe1, clf2, pipe4, pipe6, pipe7])
 
-colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']  ## <- fix here
+colors = ['black', 'orange', 'blue', 'green', 'red', 'yellow', 'purple', 'pink']
 linestyles = [':', '--', '-.', '-', ':', '--', '-.', '-']
 for clf, label, clr, ls in zip(all_clf,
                                clf_labels, colors, linestyles):
@@ -322,7 +323,7 @@ plt.grid(alpha=0.5)
 plt.xlabel('False positive rate (FPR)')
 plt.ylabel('True positive rate (TPR)')
 
-# plt.savefig('images/07_04', dpi=300)
+plt.savefig('ROC.png', dpi=300)
 plt.show()
 
 # %%  Plotting decision boundaries on the first two principal components
@@ -376,13 +377,11 @@ plt.text(-14, 20,
          ha='center', va='center',
          fontsize=12, rotation=90)
 
-# plt.savefig('images/07_05', dpi=300)
+plt.savefig('AgeHours.png', dpi=300)
 plt.show()
 
 
 # %% Plotting decision boundaries first two principal components
-from itertools import product
-
 pca = PCA(n_components=2)
 
 X = pca.fit_transform(X)
@@ -432,4 +431,5 @@ for idx, clf, name in zip(product([0, 1, 2, 3], [0, 1]),
     axarr[idx[0], idx[1]].text(xx.max() - .3, yy.min() + .3, ('%.3f' % score).lstrip('0'),
                                size=15, horizontalalignment='right')
     i += 1
+plt.savefig("1st2pc.png", dpi=300)
 plt.show()

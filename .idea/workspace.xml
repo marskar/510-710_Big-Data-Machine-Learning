@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c810d17-7c64-4c65-b692-1949fc54b072" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/SkillCraft2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SkillCraft3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py" beforeDir="false" afterPath="$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +44,8 @@
           <file leaf-file-name="SkillCraft-Ensemble-Update (2).py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="636">
-                  <caret line="406" column="35" lean-forward="true" selection-start-line="406" selection-start-column="35" selection-end-line="406" selection-end-column="35" />
+                <state relative-caret-position="415">
+                  <caret line="199" column="29" selection-start-line="199" selection-start-column="29" selection-end-line="199" selection-end-column="29" />
                   <folding>
                     <element signature="e#13#57#0" expanded="true" />
                   </folding>
@@ -68,8 +65,8 @@
           <file leaf-file-name="SkillCraft3.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/SkillCraft3.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-54">
-                  <caret line="381" column="1" lean-forward="true" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
+                <state relative-caret-position="-119">
+                  <caret line="381" column="1" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
@@ -281,7 +278,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Key Promoter X" order="0" weight="0.3298611" />
       <window_info anchor="bottom" id="TODO" order="10" weight="0.329602" />
@@ -290,12 +286,12 @@
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="7" sideWeight="0.50124377" type="SLIDING" weight="0.48333332" />
-      <window_info anchor="right" x="398" y="22" width="644" height="878" id="Run" internal_type="SLIDING" order="6" side_tool="true" type="SLIDING" weight="0.44722223" />
+      <window_info active="true" anchor="right" x="398" y="22" width="644" height="878" id="Run" internal_type="SLIDING" order="6" side_tool="true" type="SLIDING" visible="true" weight="0.44722223" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.329602" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4977221" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="1" />
-      <window_info anchor="right" x="482" y="191" width="475" height="539" id="SciView" internal_type="SLIDING" order="2" type="SLIDING" weight="0.44375" />
+      <window_info anchor="right" x="482" y="191" width="475" height="539" id="SciView" internal_type="SLIDING" order="2" type="SLIDING" visible="true" weight="0.44375" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="0" sideWeight="0.5022779" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
@@ -416,8 +412,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SkillCraft-Ensemble-Update (2).py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="406" column="35" lean-forward="true" selection-start-line="406" selection-start-column="35" selection-end-line="406" selection-end-column="35" />
+        <state relative-caret-position="415">
+          <caret line="199" column="29" selection-start-line="199" selection-start-column="29" selection-end-line="199" selection-end-column="29" />
           <folding>
             <element signature="e#13#57#0" expanded="true" />
           </folding>
