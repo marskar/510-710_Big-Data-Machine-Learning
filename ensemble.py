@@ -295,7 +295,7 @@ plt.ylabel('True positive rate (TPR)')
 plt.savefig('ROC.png', dpi=300)
 plt.show()
 
-# %%  Plotting decision boundaries on the first two principal components
+# %%  Plotting decision boundaries on Age and Hours per week
 sc = StandardScaler()
 X_train_std = sc.fit_transform(X_train.iloc[:, [2, 3]])
 all_clf = [pipe1, clf2, pipe3, pipe4, pipe5, pipe6, pipe7, mv_clf]
